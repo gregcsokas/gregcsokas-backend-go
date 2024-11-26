@@ -4,6 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"gregcsokas.hu/main/config"
 	"gregcsokas.hu/main/db"
+	"gregcsokas.hu/main/modules/auth"
 	"log"
 )
 
@@ -27,6 +28,13 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	authModule := auth.NewModule(database)
+
+	api := server.Group("/api")
+	v1 := api.Group("/v1")
+
+	auth.RegisterRoutes(v1, authModule)
 
 	err = server.Run(":8060")
 	if err != nil {
