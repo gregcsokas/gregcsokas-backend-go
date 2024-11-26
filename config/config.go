@@ -22,7 +22,7 @@ type Config struct {
 	ServerEnv  string `env:"SERVER_ENV" envDefault:"development"`
 
 	SecretKey    string `env:"SECRET_KEY" envDefault:"sup3rs3cr3t"`
-	AllowedHosts string `env:"ALLOWED_HOSTS" envDefault:"*"`
+	AllowOrigins string `env:"ALLOW_ORIGINS" envDefault:"*"`
 }
 
 func Load() (*Config, error) {
@@ -42,7 +42,7 @@ func Load() (*Config, error) {
 		ServerPort:   os.Getenv("SERVER_PORT"),
 		ServerEnv:    os.Getenv("SERVER_ENV"),
 		SecretKey:    os.Getenv("SECRET_KEY"),
-		AllowedHosts: os.Getenv("ALLOWED_HOSTS"),
+		AllowOrigins: os.Getenv("ALLOW_ORIGINS"),
 	}
 
 	if err := config.Validate(); err != nil {
