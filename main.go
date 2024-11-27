@@ -5,6 +5,7 @@ import (
 	"gregcsokas.hu/main/config"
 	"gregcsokas.hu/main/db"
 	"gregcsokas.hu/main/modules/auth"
+	"gregcsokas.hu/main/modules/blog"
 	"gregcsokas.hu/main/modules/newsletter"
 	"log"
 )
@@ -31,12 +32,14 @@ func main() {
 	}
 
 	authModule := auth.NewModule(database)
+	blogModule := blog.NewModule(database)
 	newsletterModule := newsletter.NewModule(database)
 
 	api := server.Group("/api")
 	v1 := api.Group("/v1")
 
 	auth.RegisterRoutes(v1, authModule)
+	blog.RegisterRoutes(v1, blogModule)
 	newsletter.RegisterRoutes(v1, newsletterModule)
 
 	err = server.Run(":8060")
