@@ -26,7 +26,8 @@ func main() {
 		cfg.GetDSN(),
 	)
 
-	err = database.AutoMigrate()
+	err = database.AutoMigrate(
+		&newsletter.Subscription{})
 	if err != nil {
 		log.Fatal(err)
 	}
